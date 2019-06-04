@@ -23,19 +23,22 @@ canvas.addEventListener('mousemove', function(e){
 })
 
 class Circle{
-  constructor(x, y, isMain, vx, vy){
+  constructor(x, y, isMain, vx, vy, color){
     this.x = x
     this.y = y
     this.vx = vx
     this.vy = vy
     this.isMain = isMain
+    this.color = color
   }
 
   draw = () => {
     ctx.beginPath()
-    ctx.fillStyle = '#eaeaea'
+    ctx.fillStyle = this.color
+    ctx.strokeStyle = '#333'
     ctx.arc(this.x, this.y, 20, Math.PI*2, false)
     ctx.fill()
+    ctx.stroke()
   }
 
   update = () => {
@@ -68,8 +71,8 @@ class Circle{
   }
 }
 
-let circle = new Circle(0, 0, true, 0, 0)
-let circle2 = new Circle(150, 100, false, 0, 0)
+let circle = new Circle(0, 0, true, 0, 0, '#FF6556')
+let circle2 = new Circle(300, 150, false, 0, 0, '#0078E1')
 
 function collide(el1, el2){
   let range = (Math.abs(el1.x - el2.x) + Math.abs(el1.y - el2.y));
