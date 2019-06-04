@@ -7,6 +7,8 @@ const canvasWidth = 600
 let timeLive = 0
 let totalLength = 0
 
+let isWallCollided = false
+
 // Physics
 let gacc = 0.1
 
@@ -43,15 +45,23 @@ class Circle{
     } else {
       this.y += this.vy
       this.x += this.vx
-    }
 
-    if(this.y > canvasHeight - 21 || this.y < 21){
-      this.vy -= this.vy
-      this.vy = -this.vy
-    }
-    if(this.x > canvasWidth - 21 || this.x < 21){
-      this.vx -= this.vx
-      this.vx = -this.vx
+      if((this.y > canvasHeight - 20 && isWallCollided == false) || (this.y < 20 && isWallCollided == false)){
+        isWallCollided = true
+        this.vy *= -0.8
+
+        setTimeout(()=>{
+          isWallCollided = false
+        }, 50)
+      }
+      if((this.x > canvasWidth - 20 && isWallCollided == false) || (this.x < 20 && isWallCollided == false)){
+        isWallCollided = true
+        this.vx *= -0.8
+
+        setTimeout(()=>{
+          isWallCollided = false
+        }, 50)
+      }
     }
 
     this.draw()
